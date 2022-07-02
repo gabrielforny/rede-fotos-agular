@@ -1,6 +1,10 @@
-# Gatitobook
+# Projeto de rede social de fotos - Desenvolvido em Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.0.
+Aconselho utilizar a API encontrada no link: https://github.com/gabrielforny/api-tela-login-angular. Essa API já possui dois usuários padrões para você poder testar a tela de Login, mas ela também é fundamental para a funcionalidade na parte de Registro de Novo Usuário, pois é feito a vinculação com a API e fazendo que o novo usuário que seja criado, ele consiga acessar o login.
+
+Quando for o rodar o projeto, abra o terminar da pasta da api, de npm install e depois npm start. Assim, a API estará validada e voce conseguirá acessar com os dados na tela de login!
+
+This project was generated with Angular CLI version 11.0.0.
 
 ## Development server
 
