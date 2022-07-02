@@ -7,7 +7,7 @@ import { TokenService } from '../autenticacao/token.service';
 import { Animais, Animal } from './animais';
 
 const API = environment.apiURL;
-const NOTE_MODIFIED = '304';
+const NOT_MODIFIED = '304';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class AnimaisService {
     return this.http.get<Animais>(`${API}/${nomeDoUsuario}/photos`);
   }
 
-  buscaPorId(id: number): Observable<Animal> {
+  buscaPorID(id: number): Observable<Animal> {
     return this.http.get<Animal>(`${API}/photos/${id}`);
   }
 
@@ -27,10 +27,26 @@ export class AnimaisService {
     return this.http.delete<Animal>(`${API}/photos/${id}`);
   }
 
-  curtirAnimal(id: number): Observable<boolean> {
-    return this.http.post(`${API}/photos/${id}/like`, {}, { observe: 'response' })
-      .pipe(mapTo(true), catchError((error) => {
-        return error.satatus === NOTE_MODIFIED ? of(false) : throwError(error);
-      }));
+  curtir(id: number): Observable<boolean> {
+    return this.http
+      .post(`${API}/photos/${id}/like`, {}, { observe: 'response' })
+      .pipe(
+        mapTo(true),
+        catchError((error) => {
+          return error.status === NOT_MODIFIED ? of(false) : throwError(error);
+        })
+      );
+  }
+
+  upload(descricao: string, permiteComentario: boolean, arquivo: File) {
+    const formData = new FormData();
+    formData.append('description', descricao);
+    formData.append('allowComments', permiteComentario ? 'true' : 'false');
+    formData.append('imageFile', arquivo);
+
+    return this.http.post(`${API}/photos/upload`, formData, {
+      observe: 'events',
+      reportProgress: true,
+    });
   }
 }

@@ -1,20 +1,20 @@
-import { switchMap, take } from 'rxjs/operators';
-import { UsuarioService } from 'src/app/autenticacao/usuario/usuario.service';
-import { AnimaisService } from './../animais.service';
 import { Injectable } from '@angular/core';
 import {
+  Router,
   Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+import { UsuarioService } from 'src/app/autenticacao/usuario/usuario.service';
 import { Animais } from '../animais';
+import { AnimaisService } from '../animais.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListaAnimaisResolver implements Resolve<Animais> {
-
   constructor(
     private animaisService: AnimaisService,
     private usuarioService: UsuarioService
@@ -23,7 +23,7 @@ export class ListaAnimaisResolver implements Resolve<Animais> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-    ): Observable<Animais> {
+  ): Observable<Animais> {
     return this.usuarioService.retornaUsuario().pipe(
       switchMap((usuario) => {
         const userName = usuario.name ?? '';
