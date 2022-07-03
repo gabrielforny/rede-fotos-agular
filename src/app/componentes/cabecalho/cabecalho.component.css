@@ -1,0 +1,13 @@
+.painel-usuario {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icone-login {
+  font-size: 20px;
+}
+
+.nome-usuario {
+  margin: 0;
+}

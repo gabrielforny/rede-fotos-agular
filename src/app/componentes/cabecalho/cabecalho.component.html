@@ -13,23 +13,26 @@
     <app-menu #menu>
       <ul class="list-unstyled">
         <li>
+          <a [routerLink]="'/home'">Home</a>
+        </li>
+        <li>
           <a [routerLink]="['animais', 'novo']">Novo Animal</a>
         </li>
       </ul>
     </app-menu>
 
     <div *ngIf="user$ | async as user">
-      <div *ngIf="user.name; else login">
-        <i class="fa fa-user-circle mr-1"> </i>
-        <a class="mr-1">{{ user.name }}</a>
-        <a (click)="logout()">Logout</a>
+      <div class="painel-usuario" *ngIf="user.name; else login">
+        <i class="fa fa-user-circle icone-login"> </i>
+        <p class="nome-usuario">{{ user.name }}</p>
+        <a (click)="logout()">Sair</a>
       </div>
     </div>
   </nav>
 
   <ng-template #login>
     <span class="navbar-text">
-      <a [routerLink]="['']">Login</a>
+      <a [routerLink]="['']">Entrar</a>
     </span>
   </ng-template>
 </header>
